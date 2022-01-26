@@ -29,6 +29,9 @@ namespace Homework_11.Models
                 throw new ArgumentNullException(nameof(path));
             }
             _path = path;
+
+            if (File.Exists(_path))
+                Load();
         }
 
         /// <summary>

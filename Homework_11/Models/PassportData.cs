@@ -105,5 +105,10 @@ namespace Homework_11.Models
             }
 
         }
+
+        public override string ToString()
+        {
+            return $"{Series}-{Number}";
+        }
     }
 }

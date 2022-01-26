@@ -129,14 +129,6 @@ namespace Homework_11.ViewModels
 
 
 
-
-        #region SelectedPageIndex
-        
-
-        #endregion
-
-     
-
         
 
         
