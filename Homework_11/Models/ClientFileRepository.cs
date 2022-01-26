@@ -29,8 +29,15 @@ namespace Homework_11.Models
                 throw new ArgumentNullException(nameof(path));
             }
             _path = path;
+        }
 
-            Load();
+        /// <summary>
+        /// Конструктор репозитория
+        /// </summary>
+        /// <param name="path">Путь к файлу-репозиторию</param>
+        public ClientFileRepository(string path, IEnumerable<Client> clients) : this(path)
+        {
+            _clients = clients.ToList();
         }
 
         // TODO: проверить удаление по несуществующему ИД

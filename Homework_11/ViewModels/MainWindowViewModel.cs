@@ -16,12 +16,11 @@ namespace Homework_11.ViewModels
         {
             #region Commands
             ChangePageIndexCommand = new RelayCommand(OnChangePageIndexCommandExecuted, CanChangePageIndexCommandExecute);
-            //CloseApplicationCommand = new RelayCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-            //ChangeTabIndexCommand = new RelayCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
             #endregion
 
             #region Pages
             _Clients = new Views.Pages.Clients();
+            _AppSettings = new Views.MainWindows.Pages.AppSettings();
             _Welcome1 = new Views.Pages.Welcome_1();
             _Welcome2 = new Views.Pages.Welcome_2();
             _Welcome3 = new Views.Pages.Welcome_3();
@@ -59,7 +58,7 @@ namespace Homework_11.ViewModels
                 case 1: SlowOpacity(_Clients); break;
                 case 2: SlowOpacity(_Welcome1); break;
                 case 3: SlowOpacity(_Welcome2); break;
-                case 4: SlowOpacity(_Welcome3); break;
+                case 4: SlowOpacity(_AppSettings); break;
                 default: SlowOpacity(_Welcome1); break;
             };
         }
@@ -85,6 +84,7 @@ namespace Homework_11.ViewModels
 
         #region Pages
         private Page _Clients;
+        private Page _AppSettings;
         private Page _Welcome1;
         private Page _Welcome2;
         private Page _Welcome3;

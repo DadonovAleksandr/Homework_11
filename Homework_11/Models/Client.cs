@@ -23,13 +23,13 @@ namespace Homework_11.Models
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public PhoneNumber PhoneNumber { get { return _phoneNumber; } }
+        public PhoneNumber PhoneNumber { get => _phoneNumber; }
 
         private PassportData _passportData;
         /// <summary>
         /// Паспортные данные
         /// </summary>
-        public PassportData PassportData { get { return _passportData; } }
+        public PassportData PassportData { get => _passportData; }
 
         /// <summary>
         /// Создаем клиента
