@@ -8,26 +8,25 @@ namespace Homework_11.Models
     internal abstract class Person
     {
         const int minFirstNameLength = 2;   // Минимальная длина имени
-        const int minMiddleNameLength = 2;  // Минимальная длина отчества
         const int minSecondNameLength = 2;  // Минимальная длина фамилии
 
         string _firstName;
         /// <summary>
         /// Имя
         /// </summary>
-        public string FirstName { get { return _firstName; } }
+        public string FirstName => _firstName;
 
         private string _secondName;
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string SecondName { get { return _secondName; } }
+        public string SecondName => _secondName;
 
         private string _middleName;
         /// <summary>
         /// Отчество
         /// </summary>
-        public string middleName { get { return _middleName; } }
+        public string MiddleName => _middleName;
 
         /// <summary>
         /// Создаем пользователя с именем, фамилией и необязательным отчеством
@@ -38,12 +37,12 @@ namespace Homework_11.Models
         }
 
         /// <summary>
-        /// Корректировка имени и фамилии
+        /// Корректировка имени, фамилии и необязательного отчества
         /// </summary>
         /// <param name="firstName">Имя</param>
         /// <param name="secondName">Фамилия</param>
         /// <param name="middleName">Отчество</param>
-        private protected void CorrectName(string firstName, string secondName, string middleName)
+        private protected void CorrectName(string firstName, string secondName, string middleName = "")
         {
             SetName(firstName, secondName, middleName);
         }
@@ -56,7 +55,8 @@ namespace Homework_11.Models
         /// <param name="middleName">Отчество</param>
         private void SetName(string firstName, string secondName, string middleName)
         {
-            CheckName(firstName, secondName, middleName);
+            CheckName(firstName, minFirstNameLength, "Имя");
+            CheckName(secondName, minSecondNameLength, "Отчество");
             _firstName = firstName;
             _secondName = secondName;
             _middleName = middleName;
@@ -65,42 +65,21 @@ namespace Homework_11.Models
         /// <summary>
         /// Проверка валидности имени и фамилии
         /// </summary>
-        /// <param name="firstName">Имя</param>
-        /// <param name="secondName">Фамилия</param>
-        /// <param name="middleName">Отчество</param>
+        /// <param name="name">Имя</param>
+        /// <param name="minLength">Минимальная длина</param>
+        /// <param name="errDesc">Описание для отображения ошибки</param>
         /// <returns></returns>
-        private void CheckName(string firstName, string secondName, string middleName)
+        private void CheckName(string name, int minLength, string errDesc)
         {
-            // проверка имени
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrWhiteSpace(firstName))
+            // проверка
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException($"{nameof(firstName)} не может быть null, empty, whitespace");
+                throw new ArgumentException($"{nameof(errDesc)} не может пустым или пробелом");
             }
-            if (firstName.Length < minFirstNameLength)
+            if (name.Length < minFirstNameLength)
             {
-                throw new ArgumentException($"{nameof(firstName)} не может быть короче {minFirstNameLength} симоволов");
+                throw new ArgumentException($"{nameof(errDesc)} не может быть короче {minLength} символов");
             }
-
-            // проверка фамилии
-            if (string.IsNullOrEmpty(secondName) || string.IsNullOrWhiteSpace(secondName))
-            {
-                throw new ArgumentException($"{nameof(secondName)} не может быть null, empty, whitespace");
-            }
-            if (secondName.Length < minSecondNameLength)
-            {
-                throw new ArgumentException($"{nameof(secondName)} не может быть короче {minSecondNameLength} симоволов");
-            }
-
-            // проверка отчества
-            if (string.IsNullOrWhiteSpace(middleName))
-            {
-                throw new ArgumentException($"{nameof(middleName)} не может быть null, whitespace");
-            }
-            if (middleName.Length > 0 && middleName.Length < minMiddleNameLength)
-            {
-                throw new ArgumentException($"{nameof(middleName)} не может быть короче {minMiddleNameLength} симоволов");
-            }
-
         }
 
     }
